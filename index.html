@@ -6,12 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>React Deconstructed</title>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 <body>
     <div id="app"></div>
 
     <script>
-        console.log('test')
+        const headerElement = React.createElement('h1', {id: 'header'}, 'Boblin the Goblin')
+        console.log('headerElement', headerElement)
+
+        ReactDOM.render(
+            headerElement,
+            document.getElementById('app')
+        )
     </script>
 </body>
 </html>
