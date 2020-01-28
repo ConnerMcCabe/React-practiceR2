@@ -1,0 +1,10 @@
+Components- let you split UI into independent, reusable pieces and work with them in isolation
+function Components- (LITERALLY A JS FUNCTION) write a function in JS, it is valid cause it accepts "props"
+class Components- less common now, use Hooks part of the state and lifecycle fun comps make up the larger class comp
+props- properties, the object argument with data that returns the react element
+hooks- lets you use state and other React features without writing class
+
+
+if you were going to make react, needs a:
+    JS file where react is writen
+    an HTML where the script is encapsulated 
