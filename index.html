@@ -14,12 +14,26 @@
     <script>
         const name = "Boblin";
         const epitaph = "the Goblin";
-        const headerElement = React.createElement('h1', null, name)
-        const handleElement = React.createElement('h3', null, epitaph)
 
-        const wrapperElement = React.createElement('div', {id: 'container'}, headerElement, handleElement)
+        function NameComponent(props) {
+            return React.createElement(
+                'h1', null, props.name,
+            )
+        }
+        function EpitaphComponent(props) {
+            return React.createElement(
+                'h3', null, props.epitaph,
+            )
+        }
+        // const headerElement = React.createElement('h1', null, name)
+        // const handleElement = React.createElement('h3', null, epitaph)
 
-        console.log('headerElement', headerElement, handleElement)
+        const wrapperElement = React.createElement('div', {id: 'container'}, 
+            React.createElement(NameComponent, {name: "Boblin"}), 
+            React.createElement(EpitaphComponent, {epitaph: "the Goblin"}),
+        )
+
+        // console.log('headerElement', headerElement, handleElement)
 
         ReactDOM.render(
             wrapperElement,

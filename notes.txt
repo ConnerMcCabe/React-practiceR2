@@ -8,3 +8,10 @@ hooks- lets you use state and other React features without writing class
 if you were going to make react, needs a:
     JS file where react is writen
     an HTML where the script is encapsulated 
+whats the difference between react elements and components?
+    in order to build your UI, you need a bunch of components, that you then compose together   
+    a component is a function (or class) that optionally accepts input and returns a react element
+    so basically you make these
+
+state- data within the app
+props- information you pass a component
