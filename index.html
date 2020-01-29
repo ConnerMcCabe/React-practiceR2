@@ -34,7 +34,16 @@
                     friends: ["Hob", "Lob", "Korg"]
                 }
             }
-            
+            handleAddFriend() {
+
+            }
+            handleRemoveFriend(name) {
+                this.setState((currentState) => {
+                    return {
+                        friends: currentState.friends.filter((friend) => friend !== name)
+                    }
+                })
+            }
             render() {
 
                 return (
