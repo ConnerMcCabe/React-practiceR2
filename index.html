@@ -15,20 +15,36 @@
     <script type="text/babel">
         const name = "Boblin";
         const epitaph = "the Goblin";
+        const friends = ["Hob", "Lob", "Korg"]
 
-        function NameComponent(props) {
-            return <h1>{props.name}</h1>
-        }
+        // function NameComponent(props) {
+        //     return <h1>{props.name}</h1>
+        // }
 
-        function EpitaphComponent(props) {
-            return <h3>{props.epitaph}</h3>
+        // function EpitaphComponent(props) {
+        //     return <h3>{props.epitaph}</h3>
+        // }
+
+        function FriendsList(props) {
+            return (
+                <ul>
+                    {props.list.map((friends) => (
+                        <li key={friends}>
+                           {friends} 
+                        </li>
+                    ))}
+                </ul>
+            )
         }
 
         function App() {
+            // <NameComponent name={name}/>
+            // <EpitaphComponent epitaph={epitaph}/>
+
             return (
                 <div id="container">
-                    <NameComponent name={name}/>
-                    <EpitaphComponent epitaph={epitaph}/>
+                 
+                    <FriendsList list={friends} />
                 </div>
             )
         }
