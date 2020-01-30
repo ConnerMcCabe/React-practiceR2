@@ -38,7 +38,7 @@
                     <h2>There</h2>
                     <ul>
                         {props.list.map((friend) => (
-                            <li>
+                            <li key={friend.name}>
                                 <span>{friend.name}</span>
                                 <button onClick={() => props.onRemove(friend.name)}>X</button>
                                 <button onClick={() => props.onToggle(friend.name)}>Here</button>
@@ -82,12 +82,12 @@
                     }
                 })
             }
-            handleToggle() {
+            handleToggle(name) {
                 this.setState((currentState) => {
                     const friend = currentState.friends.find((friend) => friend.name === name)
                     return {
                         friends: currentState.friends.filter((friend) => friend.name !== name)
-                        .concat([{ name, active:!friend.active}])
+                        .concat([{ name, active: !friend.active}])
                     }
                 })
             }
@@ -108,7 +108,7 @@
                             onChange={this.updateInput}>
                         </input>
                         <button onClick={this.handleAddFriend}>Submit</button>
-                        <div><button onClick={() => this.setState({ friends:[] })}>Clear All</button></div>
+                        <button onClick={() => this.setState({ friends:[] })}>Clear All</button>
                         <HereGobbos 
                             list={this.state.friends.filter((friend) => friend.active === true)}
                             onRemove={this.handleRemoveFriend} 
