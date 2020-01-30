@@ -16,16 +16,36 @@
         const name = "Boblin";
         const epitaph = "the Goblin";
 
-        function FriendsList(props) {
+        function HereGobbos(props) {
             return (
-                <ul>
-                    {props.list.map((name) => (
-                        <li key={name}>
-                            <span>{name}</span>
-                            <button onClick={() => props.onRemove(name)}>X</button>
-                        </li>
-                    ))}
-                </ul>
+                <div>
+                    <h2>Here</h2>
+                    <ul>
+                        {props.list.map((friend) => (
+                            <li key={friend.name}>
+                                <span>{friend.name}</span>
+                                <button onClick={() => props.onRemove(friend.name)}>X</button>
+                                <button onClick={() => props.onToggle(friend.name)}>There</button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+        function ThereGobbos(props) {
+            return (
+                <div>
+                    <h2>There</h2>
+                    <ul>
+                        {props.list.map((friend) => (
+                            <li>
+                                <span>{friend.name}</span>
+                                <button onClick={() => props.onRemove(friend.name)}>X</button>
+                                <button onClick={() => props.onToggle(friend.name)}>Here</button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             )
         }
         
@@ -34,17 +54,23 @@
                 super(props)
                    
                 this.state = {
-                    friends: ["Hob", "Lob", "Dob", "Korg"],
+                    friends: [
+                        {name: "Hob", active: true}, 
+                        {name: "Lob", active: true}, 
+                        {name: "Dob", active: true}, 
+                        {name: "Korg", active: false},
+                    ],
                     input: '',
                 }
                 this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
                 this.updateInput = this.updateInput.bind(this)
                 this.handleAddFriend = this.handleAddFriend.bind(this)
+                this.handleToggle = this.handleToggle.bind(this)
             }
             handleAddFriend() {
                 this.setState((currentState) =>{
                     return {
-                        friends: currentState.friends.concat([this.state.input]),
+                        friends: currentState.friends.concat([{name: this.state.input, active: true}]),
                         input: '',
                     }
                 })
@@ -56,9 +82,17 @@
                     }
                 })
             }
+            handleToggle() {
+                this.setState((currentState) => {
+                    const friend = currentState.friends.find((friend) => friend.name === name)
+                    return {
+                        friends: currentState.friends.filter((friend) => friend.name !== name)
+                        .concat([{ name, active:!friend.active}])
+                    }
+                })
+            }
             updateInput(e) {
                 const value = e.target.value
-
                 this.setState({
                     input: value
                 })
@@ -74,17 +108,21 @@
                             onChange={this.updateInput}>
                         </input>
                         <button onClick={this.handleAddFriend}>Submit</button>
-                        <FriendsList 
-                            list={this.state.friends}
+                        <div><button onClick={() => this.setState({ friends:[] })}>Clear All</button></div>
+                        <HereGobbos 
+                            list={this.state.friends.filter((friend) => friend.active === true)}
                             onRemove={this.handleRemoveFriend} 
+                            onToggle={this.handleToggle}
+                        />
+                        <ThereGobbos 
+                            list={this.state.friends.filter((friend) => friend.active === false)}
+                            onRemove={this.handleRemoveFriend} 
+                            onToggle={this.handleToggle}
                         />
                     </div>
                 )
             }
         }
-
-
-
 
         ReactDOM.render( <App />, document.getElementById('app'))
     </script>
