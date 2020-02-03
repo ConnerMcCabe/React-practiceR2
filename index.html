@@ -79,6 +79,17 @@
             }
 
             componentDidMount() {
+                const stopper = this.state.text + "..." 
+
+                window.setInterval(() => {
+                    this.state.text === stopper
+                    ? this.setState({text: 'Loading'}) 
+                    : this.setState((currentState) => { 
+                        return {
+                            text: currentState.text + "." })), 300);
+                        }
+                        
+
                 API.fetchFriends()
                     .then((friends) => {this.setState({friends, loading: false,})})
             }
