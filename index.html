@@ -21,7 +21,7 @@
                         {name: "Dob", active: true}, 
                         {name: "Korg", active: false},
                     ]
-                    setTimeout(() => res(friends), 5000);
+                    setTimeout(() => res(friends), 2000);
                 })
             }
         }
@@ -81,12 +81,12 @@
             componentDidMount() {
                 const stopper = this.state.text + "..." 
 
-                window.setInterval(() => {
+                this.interval = setInterval(() => {
                     this.state.text === stopper
                     ? this.setState({text: 'Loading'}) 
                     : this.setState((currentState) => { 
                         return {
-                            text: currentState.text + "." })), 300);
+                            text: currentState.text + "." }), 300);
                         }
                         
 
@@ -94,7 +94,7 @@
                     .then((friends) => {this.setState({friends, loading: false,})})
             }
             componentWillUnmount() {
-
+                clearInterval(this.interval) 
             }
             componentDidUpdate() {
 
